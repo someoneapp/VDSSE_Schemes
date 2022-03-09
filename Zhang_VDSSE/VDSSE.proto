@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package VDSSE;
+
+service RPC {
+
+// Search
+rpc search (SearchRequestMessage) returns (stream SearchReply) {}
+
+// Update
+rpc update (UpdateRequestMessage) returns ( ExecuteStatus ) {}
+rpc batch_update (stream UpdateRequestMessage) returns ( ExecuteStatus ) {}
+
+}
+
+
+message SearchRequestMessage
+{
+    bytes tw = 1;
+    bytes st = 2;
+	uint64 uc = 3;
+}
+
+
+message SearchReply
+{
+	bytes ind = 1;
+
+}
+
+message UpdateRequestMessage
+{
+    bytes l = 1;
+    bytes e = 2;
+}
+
+message ExecuteStatus
+{
+	bool status = 1; 
+}
